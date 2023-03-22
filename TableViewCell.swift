@@ -8,16 +8,32 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
+    
+    let label: UILabel = UILabel()
+    let priceLabel: UILabel = UILabel()
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configure()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implement")
+    }
+    
+    private func configure() {
+        addSubview(label)
+        addSubview(priceLabel)
+        label.font = .boldSystemFont(ofSize: 18)
+        priceLabel.font = .italicSystemFont(ofSize: 10)
+        label.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(5)
+            make.top.equalToSuperview()
+            }
+        priceLabel.snp.makeConstraints { make in
+            make.left.equalTo(label)
+            make.top.equalTo(label).offset(-5)
+        }
     }
 
 }
